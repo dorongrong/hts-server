@@ -1,50 +1,36 @@
 import express from "express";
 import { School } from "../types/school";
+import SchoolModel from "../model/school.model";
 
 const router = express.Router();
 
-const data = [
-  {
-    id: 1,
-    name: "동북고",
-  },
-  {
-    id: 2,
-    name: "가락고",
-  },
-  {
-    id: 3,
-    name: "오금고",
-  },
-  {
-    id: 4,
-    name: "송파공고",
-  },
-];
+router.get("/", async (req, res) => {
+  const schools: SchoolModel[] = await SchoolModel.findAll();
+  return res.status(200).json(schools);
+});
 
-router.get("/", (req, res) => res.status(200).json(data));
-
-router.get("/:schoolId", (req, res) => {
+router.get("/:schoolId", async (req, res) => {
   const { schoolId } = req.params;
   if (!schoolId) {
     return res.status(400).json();
   }
 
   const schoolIdNumber: number = parseInt(schoolId, 10);
-  if (!data.some(({ id }) => id === schoolIdNumber)) {
+  const school: SchoolModel | null = await SchoolModel.findByPk(schoolIdNumber);
+  if (!school) {
     return res.status(404).json();
   }
-
-  const filtered = data.filter((item) => item.id === schoolIdNumber);
-  return res.status(200).json(filtered[0]);
+  return res.status(200).json(school);
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const school: School = req.body as School;
   if (!school) {
     return res.status(400).json();
   }
-  data.push(school);
+  await SchoolModel.create({
+    name: school.name,
+  });
   return res.status(201).json();
 });
 
