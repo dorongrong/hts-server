@@ -1,5 +1,5 @@
 import { AllowNull, AutoIncrement, Column, DataType, Model, PrimaryKey, Table, ForeignKey, BelongsTo } from "sequelize-typescript";
-import StockItem from "./stockItem.model";
+import StockItem from "./stockltem.model";
 import User from "./user.model";
 
 @Table
@@ -13,13 +13,17 @@ export default class School extends Model {
   @Column(DataType.STRING(20))
   type: "buy" | "sell";
 
+  @AllowNull(false)
+  @Column(DataType.STRING(20))
+  status: "order" | "confirm" | "cancel";
+
   @ForeignKey(() => StockItem)
   @Column
   stockItemId: bigint;
 
   @ForeignKey(() => User)
   @Column
-  stockItemId: bigint;
+  userId: bigint;
 
   @AllowNull(false)
   @Column

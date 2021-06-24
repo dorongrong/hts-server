@@ -1,9 +1,9 @@
-import { AllowNull, AutoIncrement, Column, DataType, Model, PrimaryKey, Table, Table } from "sequelize-typescript";
+import { AllowNull, AutoIncrement, Column, DataType, HasMany, Model, PrimaryKey, Table } from "sequelize-typescript";
 import Order from "./order.model";
 import StockItemHistory from "./stockItemHistory.model";
 
 @Table
-export default class StockItem extends Models {
+export default class StockItem extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column
