@@ -1,5 +1,5 @@
 import express from "express";
-import { getSchoolItems } from "../service/stockItem.service";
+import { getStockItems } from "../service/stockItem.service";
 import { CurrentStockPrice } from "../types/stock";
 
 const router = express.Router();

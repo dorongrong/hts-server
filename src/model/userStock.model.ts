@@ -10,6 +10,9 @@ export default class UserStock extends Model {
 
   @ForeignKey(() => User)
   @Column
+  userId: bigint;
+
+  @Column
   unitPrice: number;
 
   @AllowNull(false)

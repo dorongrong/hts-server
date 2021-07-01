@@ -3,7 +3,7 @@ import StockItem from "./stockltem.model";
 import User from "./user.model";
 
 @Table
-export default class School extends Model {
+export default class Order extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column

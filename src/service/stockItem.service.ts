@@ -25,4 +25,5 @@ export const getStockItems = async () => {
       percent: (history.price - history.startPrice) / history.startPrice,
     };
   });
+  return items;
 };
